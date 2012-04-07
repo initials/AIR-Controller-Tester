@@ -16,9 +16,6 @@ package
         override public function create():void
         {
 			FlxG.bgColor = 0xFF000000;
-			
-			//hide the mouse
-			FlxG.mouse.visible = false;
 
 			title = new FlxText(10, 10, FlxG.width, "Controller Tester");
 			title.alignment = "center";
@@ -40,27 +37,28 @@ package
 		
 		override public function update():void
 		{
-			controllerOutput.text = "";
 			joystick.JoyQuery();
 			controllersConntected.text = "Controllers connected: " + joystick.getTotal().toString();
 			
-			/*controllerOutput.text += "Btn 0: " + joystick.buttonIsDown(0, 0) + "   ";*/
+			var text:String = "";
 			
 			for(var i:int = 0; i < joystick.getTotal(); i++)
 			{
 				var i2:int;
-				controllerOutput.text += "Joystick " + i + ":\n\t";
+				text += "Joystick " + i + ":\n\t";
 				for(i2 = 0; i2 < joystick.getTotalAxes(i); i2++)
 				{
-					controllerOutput.text += "Axes" + i2 + ": " + joystick.getAxis(i, i2) + "\n\t";
+					text += "Axes" + i2 + ": " + joystick.getAxis(i, i2) + "\n\t";
 				}
 				controllerOutput.text += "\n\t";
 				for(i2 = 0; i2 < joystick.getTotalButtons(i); i2++)
 				{
-					controllerOutput.text += "Button" + i2 + ": " + joystick.buttonIsDown(i, i2) + "\n\t";
+					text += "Button" + i2 + ": " + joystick.buttonIsDown(i, i2) + "\n\t";
 				}
-				controllerOutput.text += "\n";					
+				text += "\n";					
 			}
+			
+			controllerOutput.text = text;
 		}
     }
 }
