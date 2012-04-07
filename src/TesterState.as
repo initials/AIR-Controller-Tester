@@ -10,9 +10,6 @@ package
 		private var controllersConntected:FlxText;
 		private var controllerOutput:FlxText;
 
-		//buttons in the menu
-		private var aboutButton:FlxButton;
-
 		//Create a new Joystick object to interface with the joystick extension.
 		private var joystick:Joystick = new Joystick();
 		
@@ -30,16 +27,10 @@ package
 			controllersConntected.size = 12;
 			add(controllersConntected);
 			
-			controllerOutput = new FlxText(0, 100, FlxG.width, "");
+			controllerOutput = new FlxText(10, 100, FlxG.width, "");
 			controllerOutput.alignment = "left";
 			controllerOutput.size = 12;
 			add(controllerOutput);
-
-			aboutButton = new FlxButton(FlxG.width - 200, 400, "Brett Chalupa", onBrett);
-			aboutButton.color = 0xffffffff;
-			aboutButton.label.color = 0x000000;
-			aboutButton.scale = new FlxPoint(2, 2);
-			add(aboutButton);
 
 			FlxG.mouse.show();
         }
@@ -58,20 +49,15 @@ package
 				controllerOutput.text += "Joystick " + i + ":\n\t";
 				for(i2 = 0; i2 < joystick.getTotalAxes(i); i2++)
 				{
-					controllerOutput.text += "Axes" + i2 + ": " + joystick.getAxis(i, i2) + "  \n\t";
+					controllerOutput.text += "Axes" + i2 + ": " + joystick.getAxis(i, i2) + "\n\t";
 				}
 				controllerOutput.text += "\n\t";
 				for(i2 = 0; i2 < joystick.getTotalButtons(i); i2++)
 				{
-					controllerOutput.text += "Btn" + i2 + ": " + joystick.buttonIsDown(i, i2) + "   ";
+					controllerOutput.text += "Button" + i2 + ": " + joystick.buttonIsDown(i, i2) + "\n\t";
 				}
 				controllerOutput.text += "\n";					
 			}
-		}
-
-		protected function onBrett():void
-		{
-			//open home page
 		}
     }
 }
