@@ -58,6 +58,7 @@
   <externalLibraryPaths>
     <element path="extension\joyquery.ane" />
     <element path="extension\joyquery.swc" />
+    <element path="lib\joyquery.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
