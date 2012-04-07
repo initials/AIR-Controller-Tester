@@ -16,6 +16,9 @@ package
         override public function create():void
         {
 			FlxG.bgColor = 0xFF000000;
+			
+			//hide the mouse
+			FlxG.mouse.visible = false;
 
 			title = new FlxText(10, 10, FlxG.width, "Controller Tester");
 			title.alignment = "center";
