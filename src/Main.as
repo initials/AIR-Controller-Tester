@@ -2,21 +2,17 @@
 {
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
-
+	
 	public class Main extends Engine
 	{
-
-		public function Main():void 
+		public function Main()
 		{
-			//init the game
-			super(640, 480, 60, true);
+			super(800, 600, 60, false);
 		}
-
+		
 		override public function init():void
 		{
-			FP.world = new Menu();
+			FP.world = new Tester();
 		}
-
 	}
-
 }
