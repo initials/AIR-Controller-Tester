@@ -2,11 +2,11 @@
 <application xmlns="http://ns.adobe.com/air/application/3.1">
 	
 	<id>AIRControllerTester</id> 
-	<versionNumber>1.0</versionNumber> 
+	<versionNumber>0.1.0</versionNumber> 
 	<filename>AIRControllerTester</filename> 
 	
 	<name>AIR-Controller-Tester</name> 
-	<description></description> 
+	<description>A program for testing controller input for AIR games.</description> 
 	<copyright></copyright> 
 	
 	<initialWindow> 
@@ -24,4 +24,9 @@
 	More options:
 	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
 	-->
+	<versionLabel>alpha</versionLabel>
+	<supportedProfiles>extendedDesktop</supportedProfiles>
+	<extensions>
+		<extensionID>extension.JoyQuery.Joystick</extensionID>
+	</extensions>
 </application>
