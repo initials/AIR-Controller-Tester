@@ -4,6 +4,10 @@ AIR Controller Tester displays input from controllers.
 
 It currently supports up to 16 controllers. Testing controllers is hot-swappable.
 
+## Download
+
+[Download the latest version.](https://github.com/brettchalupa/AIR-Controller-Tester/downloads)
+
 ## Contributing
 
 Master branch is the latest version, development branch is whatever I am working on.
