@@ -3,3 +3,4 @@ air/*
 
 # Ignore FlashDevelop executables
 bin/*
+obj/*
