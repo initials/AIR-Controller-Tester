@@ -70,6 +70,92 @@ This would be your best bet:
 <br />
 <a href="http://brettchalupa.com/game-development/native-controller-support-for-flash-with-adobe-air/">An entire post dedicated to adding controller support to your AIR game.</a>
 
+<h3>Text Walkthrough:</h3>
+
+<p><strong>This tutortial assumes you already have an AIR application setup in FlashDevelop with the proper batch files. If you don't, simply create a new project as an AS3 AIR Projector and go from there.</strong></p>
+
+<ol>
+<li>Download <a href="https://github.com/downloads/brettchalupa/AIR-APE/joy-query-flashdevelop.zip">joy-query-flashdevelop.zip</a></li>
+<li>Unzip the file</li>
+<li>Drag the <code>lib/</code> and <code>extension/</code> folder into the root directory of the AIR FlashDevelop project</li>
+<li>Expand the <code>lib</code> folder in FlashDevelop, and right click on <code>joyquery.swc</code></li>
+<li>Select "Add to Library"</li>
+<li>Right click on <code>joyquery.swc</code> again</li>
+<li>Select "Options..."</li>
+<li>In options, select "External Library" and press "OK"</li>
+<li>Open the <code>application.xml</code></li>
+<li>Add the following lines of code right before the closing <em>application</em> tag:
+<pre>
+<supportedProfiles>extendedDesktop</supportedProfiles>
+<extensions>
+    <extensionID>extension.JoyQuery.Joystick</extensionID>
+</extensions>
+</pre>
+</li>
+<li>Open the <code>Run.bat</code> file</li>
+<li>In the line that looks like <code>adl "%APP_XML%" "%APP_DIR%"</code>, add <code>-extdir extension/debug/</code> at the end</li>
+<li>Open the <code>bat/Packager.bat</code> file</li>
+<li>In the line that looks like <code>adl "call adt -package %OPTIONS% %SIGNING_OPTIONS% -target native %AIR_TARGET% %APP_XML% %FILE_OR_DI</code>, add <code>-extdir extension/release/</code> at the end</li>
+<li>Open <code>PackageApp.bat</code></li>
+<li>In the line that says <code>set AIR_TARGET=</code> change it to <code>set AIR_TARGET=air/ProgramName.exe</code>, where ProgramName is the name of your game!</li>
+<li>Open the source code of the game where you want to add joystick support, this could be in your <code>Player</code> class, <code>Input</code> class or wherever really</li>
+<li>At the top of your class, you need to import the JoyQuery extension. Add <code>import extensions.JoyQuery.Joystick;</code></li>
+<li>Right before your class constructor, create a variable of type <code>Joystick</code>, it should look something like <code>private var joystick:Joystick = new Joystick();</code></li>
+<li><strong>This is important</strong> - you need to call <code>joystick.JoyQuery()</code> at the beginning of every update. This checks for any controller changes or button presses</li>
+<li>Use the API below for different calls on your <code>Joystick</code> object. An example would be <code>joystick.buttonIsDown(0, 0)</code>, checking to see if Button 1 (Index 0) is being pressed on Controller 1 (Index 0)</li>
+<li>If your program executes nicely when you press the Play button or press F5, you're almost there! The next step is to right click on <code>PackageApp.bat</code> and select "Execute" (or just double-click if you're in Windows Explorer). This should created your exe in the <code>air/</code> directory. You should be good to go! Install it, try it, and enjoy it. :)</li>
+</ol>
+
+The source for that step-by-step walkthrough can be found <a href="https://github.com/brettchalupa/AIR-APE">right here, on github</a>. If you got lost in a step on the walkthrough or it wasn't clear enough, that should give you a little bit more context. :)
+
+<p>The rest is up to you! For the analog controls, I'd suggest setting thresholds or making your movement based upon the analog value of the stick. If you are having trouble figuring out the values for a controller, use <a href="https://github.com/brettchalupa/AIR-Controller-Tester">AIR-Controller-Tester</a>.</p>
+
+<h3>JoyQuery 2.0 API's</h3>
+
+<p>Class path: (import extension.JoyQuery.Joystick;)
+    <code>extension.JoyQuery.Joystick</code></p>
+
+<p>Joystick() Constructor 
+    <code>public function Joystick()</code></p>
+
+<pre>Creates a new Joystick instance.
+</pre>
+
+<p>JoyQuery() method 
+    <code>public function JoyQuery():void</code></p>
+
+<pre>Query the joysticks to update their possitions for the other functions. Best to call this on an ENTER_FRAME event.
+</pre>
+
+<p>getTotal() method 
+   <code>public function getTotal():Number</code></p>
+
+<pre>Returns the total number of connected joysticks.
+</pre>
+
+<p>buttonIsDown() method 
+    <code>public function buttonIsDown(joystickNum:Number, buttonNum:Number):Boolean</code></p>
+
+<pre>Returns true if the selected joystick number and button number is down, false if it is up.
+</pre>
+
+<p>getAxis() method 
+    <code>public function getAxis(joystickNum:Number, axisNum:Number):Number</code></p>
+
+<pre>Returns the position selected joystick number and axis number. Ranges from -1 to 1.</pre>
+
+<p>getTotalButtons() method 
+    <code>public function getTotalButtons(joystickNum:Number):Number</code></p>
+
+<pre>Returns the total number of buttons on the selected joystick.
+</pre>
+
+<p>getTotalAxes() method 
+    <code>public function getTotalAxes(joystickNum:Number):Number</code></p>
+
+<pre>Returns the total number of axes on the selected joystick.
+</pre>
+
 <h2>About</h2>
 
 <p>AIR Controller Tester is exactly what it sounds like, an AIR application that is used to get the input values of different buttons and axes of Joysticks. This is useful for figuring out input thresholds and what buttons you need to be checking for.</p>
