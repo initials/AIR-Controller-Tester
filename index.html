@@ -85,12 +85,12 @@ This would be your best bet:
 <li>In options, select "External Library" and press "OK"</li>
 <li>Open the <code>application.xml</code></li>
 <li>Add the following lines of code right before the closing <em>application</em> tag:
-<pre>
+<code>
 <supportedProfiles>extendedDesktop</supportedProfiles>
 <extensions>
     <extensionID>extension.JoyQuery.Joystick</extensionID>
 </extensions>
-</pre>
+</code>
 </li>
 <li>Open the <code>Run.bat</code> file</li>
 <li>In the line that looks like <code>adl "%APP_XML%" "%APP_DIR%"</code>, add <code>-extdir extension/debug/</code> at the end</li>
