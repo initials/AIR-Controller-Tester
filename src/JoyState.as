@@ -50,6 +50,10 @@ package
 		public var info15:FlxText;
 		public var info16:FlxText;
 		public var info17:FlxText;
+		public var info18:FlxText;
+		public var info19:FlxText;
+		public var info20:FlxText;
+		public var info21:FlxText;
 		
 		override public function create():void
 		{
@@ -126,10 +130,43 @@ package
 			add(info13);				
 			
 			
+			info14 = new FlxText(10, 390, FlxG.width/2, "");
+			info14.alignment = "center";
+			info14.size = 12;
+			add(info14);			
+			info15 = new FlxText(10, 410, FlxG.width/2, "");
+			info15.alignment = "center";
+			info15.size = 12;
+			add(info15)	
 			
+			info16 = new FlxText(10, 430, FlxG.width/2, "");
+			info16.alignment = "center";
+			info16.size = 12;
+			add(info16);			
+			info17 = new FlxText(10, 450, FlxG.width/2, "");
+			info17.alignment = "center";
+			info17.size = 12;
+			add(info17)			
 			
+			info18 = new FlxText(10, 470, FlxG.width/2, "");
+			info18.alignment = "center";
+			info18.size = 12;
+			add(info18);			
 			
+			info19 = new FlxText(10, 490, FlxG.width/2, "");
+			info19.alignment = "center";
+			info19.size = 12;
+			add(info19);
 			
+			info20 = new FlxText(10, 510, FlxG.width/2, "");
+			info20.alignment = "center";
+			info20.size = 12;
+			add(info20);
+			
+			info21 = new FlxText(10, 530, FlxG.width/2, "");
+			info21.alignment = "center";
+			info21.size = 12;
+			add(info21);
 			
 			
 		}
@@ -153,6 +190,16 @@ package
 			
 			info12.text = "Button Left Stick Click: " + FlxG.joystick.j1ButtonLeftStickClickPressed;
 			info13.text = "Button Right Stick Click: " + FlxG.joystick.j1ButtonRightStickClickPressed;
+			
+			info14.text = "Stick 1 Left: " + FlxG.joystick.j1Stick1LeftPressed;
+			info15.text = "Stick 1 Right: " + FlxG.joystick.j1Stick1RightPressed;			
+			info16.text = "Stick 1 Up: " + FlxG.joystick.j1Stick1UpPressed;
+			info17.text = "Stick 1 Down: " + FlxG.joystick.j1Stick1DownPressed;
+			
+			info18.text = "Stick 2 Left: " + FlxG.joystick.j1Stick2LeftPressed;
+			info19.text = "Stick 2 Right: " + FlxG.joystick.j1Stick2RightPressed;			
+			info20.text = "Stick 2 Up: " + FlxG.joystick.j1Stick2UpPressed;
+			info21.text = "Stick 2 Down: " + FlxG.joystick.j1Stick2DownPressed;
 			
 			if (FlxG.joystick.j1ButtonAJustPressed) {
 				info4.scale.x = 2;
@@ -186,8 +233,31 @@ package
 			}
 			if (FlxG.joystick.j1ButtonRightStickClickJustPressed) {
 				info13.scale.x = 2;
+			}	
+			if (FlxG.joystick.j1Stick1LeftJustPressed) {
+				info14.scale.x = 2;
+			}
+			if (FlxG.joystick.j1Stick1RightJustPressed) {
+				info15.scale.x = 2;
 			}			
-			
+			if (FlxG.joystick.j1Stick1UpJustPressed) {
+				info16.scale.x = 2;
+			}
+			if (FlxG.joystick.j1Stick1DownJustPressed) {
+				info17.scale.x = 2;
+			}			
+			if (FlxG.joystick.j1Stick2LeftJustPressed) {
+				info18.scale.x = 2;
+			}
+			if (FlxG.joystick.j1Stick2RightJustPressed) {
+				info19.scale.x = 2;
+			}			
+			if (FlxG.joystick.j1Stick2UpJustPressed) {
+				info20.scale.x = 2;
+			}
+			if (FlxG.joystick.j1Stick2DownJustPressed) {
+				info21.scale.x = 2;
+			}			
 			scale(info4);
 			scale(info5);
 			scale(info6);
@@ -198,6 +268,14 @@ package
 			scale(info11);
 			scale(info12);
 			scale(info13);
+			scale(info14);
+			scale(info15);
+			scale(info16);
+			scale(info17);
+			scale(info18);
+			scale(info19);
+			scale(info20);
+			scale(info21);
 			
 			
 			super.update();

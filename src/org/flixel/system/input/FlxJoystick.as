@@ -72,6 +72,28 @@ package org.flixel.system.input
 		public var j1Stick2Angle:Number;		
 		public var j1Trigger:Number;
 		
+		public var j1Stick1DownPressed:Boolean;
+		public var j1Stick1UpPressed:Boolean;
+		public var j1Stick1LeftPressed:Boolean;
+		public var j1Stick1RightPressed:Boolean;
+		
+		public var j1Stick1DownJustPressed:Boolean;
+		public var j1Stick1UpJustPressed:Boolean;
+		public var j1Stick1LeftJustPressed:Boolean;
+		public var j1Stick1RightJustPressed:Boolean;	
+		
+		public var j1Stick2DownPressed:Boolean;
+		public var j1Stick2UpPressed:Boolean;
+		public var j1Stick2LeftPressed:Boolean;
+		public var j1Stick2RightPressed:Boolean;
+		
+		public var j1Stick2DownJustPressed:Boolean;
+		public var j1Stick2UpJustPressed:Boolean;
+		public var j1Stick2LeftJustPressed:Boolean;
+		public var j1Stick2RightJustPressed:Boolean;
+		
+		// JOYSTICK 2
+		
 		private var j2Button0Pressed:Boolean;
 		private var j2Button1Pressed:Boolean;
 		private var j2Button2Pressed:Boolean;
@@ -131,9 +153,25 @@ package org.flixel.system.input
 		 */
 		public var j2Stick2Angle:Number;		
 		
-
+		public var j2Stick1DownPressed:Boolean;
+		public var j2Stick1UpPressed:Boolean;
+		public var j2Stick1LeftPressed:Boolean;
+		public var j2Stick1RightPressed:Boolean;
 		
+		public var j2Stick1DownJustPressed:Boolean;
+		public var j2Stick1UpJustPressed:Boolean;
+		public var j2Stick1LeftJustPressed:Boolean;
+		public var j2Stick1RightJustPressed:Boolean;	
 		
+		public var j2Stick2DownPressed:Boolean;
+		public var j2Stick2UpPressed:Boolean;
+		public var j2Stick2LeftPressed:Boolean;
+		public var j2Stick2RightPressed:Boolean;
+		
+		public var j2Stick2DownJustPressed:Boolean;
+		public var j2Stick2UpJustPressed:Boolean;
+		public var j2Stick2LeftJustPressed:Boolean;
+		public var j2Stick2RightJustPressed:Boolean;			
 	
 		public function FlxJoystick()
 		{
@@ -171,14 +209,214 @@ package org.flixel.system.input
 				{
 					//text += "Axes" + i2 + ": " + joystick.getAxis(i, i2) + "\n\t";
 					
-					if(i2==0)
+					if (i2 == 0) {
+						
 						this["j" + controllerNumber.toString() + "Stick1X"] = joystick.getAxis(i, i2);
-					if(i2==1)
+						
+						/* now compute the virtual d-pad. aka stick just pressed. */
+						
+						if (this["j" + controllerNumber.toString() + "Stick1X"] < -0.9) {
+								
+							//determine if the last update the button was off. if so, it has just been pressed.
+							
+							if (this["j" + controllerNumber.toString() + "Stick1LeftPressed"] == false) {
+								this["j" + controllerNumber.toString() + "Stick1LeftJustPressed"] = true;
+							}
+							else {
+								this["j" + controllerNumber.toString() + "Stick1LeftJustPressed"] = false;
+							}	
+							
+							//finally button is down, so set regular pressed to true.
+							
+							this["j" + controllerNumber.toString() + "Stick1LeftPressed"] = true;
+						}
+						
+						// button is not active. set to false.
+						
+						else {
+							this["j" + controllerNumber.toString() + "Stick1LeftPressed"] = false;
+						}
+						
+						if (this["j" + controllerNumber.toString() + "Stick1X"] > 0.9) {
+								
+							//determine if the last update the button was off. if so, it has just been pressed.
+							
+							if (this["j" + controllerNumber.toString() + "Stick1RightPressed"] == false) {
+								this["j" + controllerNumber.toString() + "Stick1RightJustPressed"] = true;
+							}
+							else {
+								this["j" + controllerNumber.toString() + "Stick1RightJustPressed"] = false;
+							}	
+							
+							//finally button is down, so set regular pressed to true.
+							
+							this["j" + controllerNumber.toString() + "Stick1RightPressed"] = true;
+						}		
+						
+						// button is not active. set to false.
+						
+						else {
+							this["j" + controllerNumber.toString() + "Stick1RightPressed"] = false;
+						}
+						
+					}
+					
+					
+					
+					if(i2==1) {
 						this["j" + controllerNumber.toString() + "Stick1Y"] = joystick.getAxis(i, i2);
-					if(i2==4)
+						
+						/* now compute the virtual d-pad. aka stick just pressed. */
+						
+						if (this["j" + controllerNumber.toString() + "Stick1Y"] < -0.9) {
+								
+							//determine if the last update the button was off. if so, it has just been pressed.
+							
+							if (this["j" + controllerNumber.toString() + "Stick1DownPressed"] == false) {
+								this["j" + controllerNumber.toString() + "Stick1DownJustPressed"] = true;
+							}
+							else {
+								this["j" + controllerNumber.toString() + "Stick1DownJustPressed"] = false;
+							}	
+							
+							//finally button is down, so set regular pressed to true.
+							
+							this["j" + controllerNumber.toString() + "Stick1DownPressed"] = true;
+						}
+						
+						// button is not active. set to false.
+						
+						else {
+							this["j" + controllerNumber.toString() + "Stick1DownPressed"] = false;
+						}
+						
+						if (this["j" + controllerNumber.toString() + "Stick1Y"] > 0.9) {
+								
+							//determine if the last update the button was off. if so, it has just been pressed.
+							
+							if (this["j" + controllerNumber.toString() + "Stick1UpPressed"] == false) {
+								this["j" + controllerNumber.toString() + "Stick1UpJustPressed"] = true;
+							}
+							else {
+								this["j" + controllerNumber.toString() + "Stick1UpJustPressed"] = false;
+							}	
+							
+							//finally button is down, so set regular pressed to true.
+							
+							this["j" + controllerNumber.toString() + "Stick1UpPressed"] = true;
+						}		
+						
+						// button is not active. set to false.
+						
+						else {
+							this["j" + controllerNumber.toString() + "Stick1UpPressed"] = false;
+						}
+						
+					}
+					
+					if(i2==4) {
 						this["j" + controllerNumber.toString() + "Stick2X"] = joystick.getAxis(i, i2);
-					if(i2==3)
+						
+						/* now compute the virtual d-pad. aka stick just pressed. */
+						
+						if (this["j" + controllerNumber.toString() + "Stick2X"] < -0.9) {
+								
+							//determine if the last update the button was off. if so, it has just been pressed.
+							
+							if (this["j" + controllerNumber.toString() + "Stick2LeftPressed"] == false) {
+								this["j" + controllerNumber.toString() + "Stick2LeftJustPressed"] = true;
+							}
+							else {
+								this["j" + controllerNumber.toString() + "Stick2LeftJustPressed"] = false;
+							}	
+							
+							//finally button is down, so set regular pressed to true.
+							
+							this["j" + controllerNumber.toString() + "Stick2LeftPressed"] = true;
+						}
+						
+						// button is not active. set to false.
+						
+						else {
+							this["j" + controllerNumber.toString() + "Stick2LeftPressed"] = false;
+						}
+						
+						if (this["j" + controllerNumber.toString() + "Stick2X"] > 0.9) {
+								
+							//determine if the last update the button was off. if so, it has just been pressed.
+							
+							if (this["j" + controllerNumber.toString() + "Stick2RightPressed"] == false) {
+								this["j" + controllerNumber.toString() + "Stick2RightJustPressed"] = true;
+							}
+							else {
+								this["j" + controllerNumber.toString() + "Stick2RightJustPressed"] = false;
+							}	
+							
+							//finally button is down, so set regular pressed to true.
+							
+							this["j" + controllerNumber.toString() + "Stick2RightPressed"] = true;
+						}		
+						
+						// button is not active. set to false.
+						
+						else {
+							this["j" + controllerNumber.toString() + "Stick2RightPressed"] = false;
+						}
+						
+					}
+					if (i2 == 3) {
+						
+						// this one appears to be inverted so mult by -1;
+						
 						this["j" + controllerNumber.toString() + "Stick2Y"] = joystick.getAxis(i, i2) * -1;
+						
+						/* now compute the virtual d-pad. aka stick just pressed. */
+						
+						if (this["j" + controllerNumber.toString() + "Stick2Y"] < -0.9) {
+								
+							//determine if the last update the button was off. if so, it has just been pressed.
+							
+							if (this["j" + controllerNumber.toString() + "Stick2DownPressed"] == false) {
+								this["j" + controllerNumber.toString() + "Stick2DownJustPressed"] = true;
+							}
+							else {
+								this["j" + controllerNumber.toString() + "Stick2DownJustPressed"] = false;
+							}	
+							
+							//finally button is down, so set regular pressed to true.
+							
+							this["j" + controllerNumber.toString() + "Stick2DownPressed"] = true;
+						}
+						
+						// button is not active. set to false.
+						
+						else {
+							this["j" + controllerNumber.toString() + "Stick2DownPressed"] = false;
+						}
+						
+						if (this["j" + controllerNumber.toString() + "Stick2Y"] > 0.9) {
+								
+							//determine if the last update the button was off. if so, it has just been pressed.
+							
+							if (this["j" + controllerNumber.toString() + "Stick2UpPressed"] == false) {
+								this["j" + controllerNumber.toString() + "Stick2UpJustPressed"] = true;
+							}
+							else {
+								this["j" + controllerNumber.toString() + "Stick2UpJustPressed"] = false;
+							}	
+							
+							//finally button is down, so set regular pressed to true.
+							
+							this["j" + controllerNumber.toString() + "Stick2UpPressed"] = true;
+						}		
+						
+						// button is not active. set to false.
+						
+						else {
+							this["j" + controllerNumber.toString() + "Stick2UpPressed"] = false;
+						}
+						
+					}
 					if (i2 == 2)
 						this["j" + controllerNumber.toString() + "Trigger"] = joystick.getAxis(i, i2);
 				}
@@ -193,7 +431,7 @@ package org.flixel.system.input
 				// stick 2
 				rotation = Math.atan2(this["j" + controllerNumber.toString() + "Stick2X"], this["j" + controllerNumber.toString() + "Stick2Y"]);
 				rotation = (rotation < 0) ? this.toDegrees(rotation + Math.PI*2) : this.toDegrees(rotation);
-				this["j" + controllerNumber.toString() + "Stick2Angle"] = rotation;				
+				this["j" + controllerNumber.toString() + "Stick2Angle"] = rotation;		
 				
 				// look through this joysticks buttons
 				
@@ -225,6 +463,8 @@ package org.flixel.system.input
 					else {
 						this["j" + controllerNumber.toString() + "Button" + i2.toString() + "Pressed"] = false;
 					}
+					
+					// Set the public vars so that you get real button names.
 					
 					// - XBOX Button A //
 					
