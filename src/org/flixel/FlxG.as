@@ -171,6 +171,11 @@ package org.flixel
 		static public var keys:Keyboard;
 		
 		/**
+		 * A reference to the FlxJoystick object.
+		 */
+		static public var joystick:FlxJoystick;
+		
+		/**
 		 * A handy container for a background music object.
 		 */
 		static public var music:FlxSound;
@@ -246,7 +251,7 @@ package org.flixel
 		static public function log(Data:Object):void
 		{
 			if((_game != null) && (_game._debugger != null))
-				_game._debugger.log.add((Data == null)?"ERROR: null object":Data.toString());
+				_game._debugger.log.add((Data == null)?"ERROR: null object":((Data is Array)?FlxU.formatArray(Data as Array):Data.toString()));
 		}
 		
 		/**
@@ -902,6 +907,18 @@ package org.flixel
 				(FlxG.cameras[i++] as FlxCamera).fade(Color,Duration,OnComplete,Force);
 		}
 		
+		
+		/**
+		 * Ends a fade
+		 */
+		static public function fadeStop():void
+		{
+			var i:uint = 0;
+			var l:uint = FlxG.cameras.length;
+			while(i < l)
+				(FlxG.cameras[i++] as FlxCamera).fadeStop();
+		}
+		
 		/**
 		 * A simple screen-shake effect.
 		 * 
@@ -939,6 +956,23 @@ package org.flixel
 			while(i < l)
 				(FlxG.cameras[i++] as FlxCamera).bgColor = Color;
 		}
+		
+		
+		static public function showDebugger():void
+		{
+			
+			_game.showDebugger();
+			
+		}
+		
+		
+		static public function hideDebugger():void
+		{
+			
+			_game.hideDebugger();
+			
+		}
+		
 
 		/**
 		 * Call this function to see if one <code>FlxObject</code> overlaps another.
@@ -1115,6 +1149,7 @@ package org.flixel
 			
 			FlxG.mouse = new Mouse(FlxG._game._mouse);
 			FlxG.keys = new Keyboard();
+			FlxG.joystick = new FlxJoystick();
 			FlxG.mobile = false;
 
 			FlxG.levels = new Array();
@@ -1151,6 +1186,7 @@ package org.flixel
 		static internal function updateInput():void
 		{
 			FlxG.keys.update();
+			FlxG.joystick.update();
 			if(!_game._debuggerUp || !_game._debugger.hasMouse)
 				FlxG.mouse.update(FlxG._game.mouseX,FlxG._game.mouseY);
 		}

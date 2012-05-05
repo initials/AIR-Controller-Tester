@@ -34,8 +34,9 @@ package org.flixel
 		 * @param	TileWidth		The width of a single tile in the graphic.
 		 * @param	TileHeight		The height of a single tile in the graphic.
 		 * @param	Empties			The number of "empty" tiles to add to the auto-fill algorithm (e.g. 8 tiles + 4 empties = 1/3 of block will be open holes).
+		 * @param	Autotile		Uses the Autotile Algo.
 		 */
-		public function loadTiles(TileGraphic:Class,TileWidth:uint=0,TileHeight:uint=0,Empties:uint=0):FlxTileblock
+		public function loadTiles(TileGraphic:Class,TileWidth:uint=0,TileHeight:uint=0,Empties:uint=0, Autotile:Boolean=true):FlxTileblock
 		{
 			if(TileGraphic == null)
 				return this;
@@ -78,9 +79,55 @@ package org.flixel
 				{
 					if(FlxG.random()*total > Empties)
 					{
-						sprite.randomFrame();
+						if (!Autotile)
+							sprite.randomFrame();
+							
+							
+						else {			
+							if (column == 0 && row == 0) { //top left
+								sprite.frame = 0;
+							}
+							else if (column == widthInTiles-1 && row == 0 ) { //top right
+								sprite.frame = 1;
+							}
+							else if (column == 0 && row == heightInTiles-1) { //bottom left
+								sprite.frame = 2;
+							}
+							else if (column == widthInTiles-1 && row == heightInTiles-1) { //bottom right
+								sprite.frame = 3;
+							}	
+							else if (row==0 && column!=0 && column!=widthInTiles-1) { //straight top
+								sprite.frame = 4;
+							} else if (row==heightInTiles-1 && column!=0 && column!=widthInTiles-1) { //straight bottom
+								sprite.frame = 5;
+							} else if (column==0 && row!=0 && row!=heightInTiles-1) { //left down straight
+								sprite.frame = 6;
+							} else if (column==widthInTiles-1 && row!=0 && row!=heightInTiles-1) { //right down straight
+								sprite.frame = 7;
+							} 
+							else {
+								sprite.frame = 15;
+							}
+							
+							if (widthInTiles==1 && row==0) { //top single down.
+								sprite.frame = 12;
+							} else if (widthInTiles==1 && row==heightInTiles-1) { //bottowidthInTiles single down.
+								sprite.frame = 13;
+							} else if (widthInTiles==1 ) { // single straight down
+								sprite.frame = 11;
+							} else if (heightInTiles==1 && column==0) { //single flat first
+								sprite.frame = 9;
+							} else if (heightInTiles==1 && column==widthInTiles-1) { //single flat horizontal last.
+								sprite.frame = 10;
+							} else if (heightInTiles==1 ) { // single flat horizontal widthInTilesiddle
+								sprite.frame = 8;
+							}							
+					
+						}
 						sprite.drawFrame();
-						stamp(sprite,destinationX,destinationY);
+						stamp(sprite, destinationX, destinationY);
+						
+						
 					}
 					destinationX += spriteWidth;
 					column++;

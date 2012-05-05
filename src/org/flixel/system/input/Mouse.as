@@ -173,7 +173,7 @@ package org.flixel.system.input
 		 * @param	YScroll		The amount the game world has scrolled vertically.
 		 */
 		public function update(X:int,Y:int):void
-		{
+		{			
 			_globalScreenPosition.x = X;
 			_globalScreenPosition.y = Y;
 			updateCursor();

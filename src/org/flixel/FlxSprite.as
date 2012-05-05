@@ -126,6 +126,23 @@ package org.flixel
 		 */
 		protected var _bakedRotation:Number;
 		/**
+		 * Internal tracker fading a sprite
+		 */
+		protected var _fadeCounter:Number;
+		
+		/**
+		 * Internal tracker for seeing if a sprite should be fading
+		 */
+		protected var _fading:Boolean;
+		/**
+		 * Internal tracker for tracking the duration of the Sprite fade
+		 */
+		protected var _fadeDuration:Number;
+		
+		
+		
+		
+		/**
 		 * Internal, stores the entire source graphic (not the current displayed animation frame), used with Flash getter/setter.
 		 */
 		protected var _pixels:BitmapData;
@@ -194,6 +211,8 @@ package org.flixel
 
 			_matrix = new Matrix();
 			_callback = null;
+			
+			_fading = false;
 			
 			if(SimpleGraphic == null)
 				SimpleGraphic = ImgDefault;
@@ -422,6 +441,22 @@ package org.flixel
 		 */
 		override public function draw():void
 		{
+			
+			if (_fading) {
+				_fadeCounter += FlxG.elapsed/_fadeDuration;
+				
+				//_colorTransform = new ColorTransform( (_color >> 16) * 0.00392, (_color >> 8 & 0xff) * 0.00392, (_color & 0xff) * 0.00392, _alpha);
+				_colorTransform = new ColorTransform( 1 - _fadeCounter ,1 - _fadeCounter,1 - _fadeCounter, _alpha);
+				//_colorTransform = new ColorTransform( (1 - _fadeCounter)*(_color >> 16) * 0.00392 ,(1 - _fadeCounter)*(_color >> 8 & 0xff) * 0.00392,(1 - _fadeCounter)*(_color & 0xff) * 0.00392, _alpha);
+
+				dirty = true;
+				
+				if (_fadeCounter > 1) {
+					_fadeCounter = 0;
+					_fading = false;
+				}
+				
+			}
 			if(_flickerTimer != 0)
 			{
 				_flicker = !_flicker;
@@ -720,6 +755,52 @@ package org.flixel
 		}
 		
 		/**
+		 * Get an array based on an image
+		 * 
+		 * @param	Color		Each time the image stores a pixel of this color, it will return a 1, or store a position
+		 * @param	FetchPositions		If true, you will return an array of positions <code>FlxPoint</code>. False will return a CSV array of 0s and 1s.
+		 */
+				
+		public function getArrayForColor(Color:uint,FetchPositions:Boolean=false):Array
+		{
+			var positions:Array = null;
+			//if(FetchPositions)
+				positions = new Array();
+			
+			var row:uint = 0;
+			var column:uint;
+			var rows:uint = _pixels.height;
+			var columns:uint = _pixels.width;
+			while(row < rows)
+			{
+				column = 0;
+				while(column < columns)
+				{
+					//return CSV array
+					if (!FetchPositions) {
+						if(_pixels.getPixel32(column,row) == Color)
+						{
+							positions.push(1);
+							dirty = true;
+						}
+						else {
+							positions.push(0);
+						}
+					}
+					//return array of positions
+					else {
+						positions.push(new FlxPoint(column,row));						
+					}
+					column++;
+				}
+				row++;
+			}
+			
+			return positions;
+		}
+		
+		
+		/**
 		 * Set <code>pixels</code> to any <code>BitmapData</code> object.
 		 * Automatically adjust graphic size and render helpers.
 		 */
@@ -810,6 +891,25 @@ package org.flixel
 			else
 				_colorTransform = null;
 			dirty = true;
+		}
+		
+		
+/*		public function fade(Color:uint, Duration:Number):void
+		{
+			_color = Color;
+			_fading = true;
+			_fadeCounter = 0;
+			_fadeDuration = Duration;
+			
+			
+		}*/
+		public function fadeToBlack( Duration:Number):void
+		{
+			_fading = true;
+			_fadeCounter = 0;
+			_fadeDuration = Duration;
+			
+			
 		}
 		
 		/**

@@ -8,7 +8,8 @@
 
 		public function Main():void
 		{
-			super(800, 600, TesterState, 1, 60, 60);
+			//super(800, 600, TesterState, 1, 60, 60);
+			super(800, 600, JoyState, 1, 60, 60);
 			forceDebugger = true;
 		}
 

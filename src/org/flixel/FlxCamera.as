@@ -473,6 +473,16 @@ package org.flixel
 		}
 		
 		/**
+		 * Ends a fade
+		 * 
+		 */
+		public function fadeStop():void
+		{
+			_fxFadeAlpha = 0;
+		}
+		
+		
+		/**
 		 * A simple screen-shake effect.
 		 * 
 		 * @param	Intensity	Percentage of screen size representing the maximum distance that the screen can move while shaking.

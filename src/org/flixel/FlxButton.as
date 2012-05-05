@@ -104,11 +104,11 @@ package org.flixel
 			super(X,Y);
 			if(Label != null)
 			{
-				label = new FlxText(0,0,80,Label);
+				label = new FlxText(0,0,91,Label);
 				label.setFormat(null,8,0x333333,"center");
 				labelOffset = new FlxPoint(-1,3);
 			}
-			loadGraphic(ImgDefaultButton,true,false,80,20);
+			loadGraphic(ImgDefaultButton,true,false,91,20);
 			
 			onUp = OnClick;
 			onDown = null;
@@ -234,7 +234,7 @@ package org.flixel
 							status = HIGHLIGHT;
 							if(onOver != null)
 								onOver();
-							if(soundOver != null)
+							if(soundOver != null && this.visible)
 								soundOver.play(true);
 						}
 					}

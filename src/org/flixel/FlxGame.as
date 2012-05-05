@@ -233,6 +233,45 @@ package org.flixel
 				else _soundTrayBars[i].alpha = 0.5;
 			}
 		}
+		
+		public function showDebugger():void
+		{
+			
+			if(_debuggerUp && _debugger.watch.editing)
+				return;
+			if(!FlxG.mobile)
+			{
+				if(_debugger != null)
+				{
+					_debugger.visible = true;
+					_debuggerUp = _debugger.visible;
+					if(!useSystemCursor)
+						flash.ui.Mouse.hide();
+					//_console.toggle();
+					return;
+				}
+			}
+		}
+		public function hideDebugger():void
+		{
+			
+			if(_debuggerUp && _debugger.watch.editing)
+				return;
+			if(!FlxG.mobile)
+			{
+				if(_debugger != null)
+				{
+					_debugger.visible = false;
+					_debuggerUp = _debugger.visible;
+					if(!useSystemCursor)
+						flash.ui.Mouse.hide();
+					//_console.toggle();
+					return;
+				}
+			}
+		}		
+		
+		
 
 		/**
 		 * Internal event handler for input and focus.
@@ -300,8 +339,11 @@ package org.flixel
 		{
 			if(_debuggerUp && _debugger.watch.editing)
 				return;
-			if(_replaying && (_replayCancelKeys != null) && (_debugger == null) && (FlashEvent.keyCode != 192) && (FlashEvent.keyCode != 220))
+				
+			//trace(_replaying, _replayCancelKeys, _debugger);
+			if(_replaying && (_replayCancelKeys != null) && (FlashEvent.keyCode != 192) && (FlashEvent.keyCode != 220)) //&& (_debugger == null) 
 			{
+				
 				var cancel:Boolean = false;
 				var replayCancelKey:String;
 				var i:uint = 0;
@@ -311,10 +353,13 @@ package org.flixel
 					replayCancelKey = _replayCancelKeys[i++];
 					if((replayCancelKey == "ANY") || (FlxG.keys.getKeyCode(replayCancelKey) == FlashEvent.keyCode))
 					{
+						
 						if(_replayCallback != null)
 						{
+							
 							_replayCallback();
 							_replayCallback = null;
+							
 						}
 						else
 							FlxG.stopReplay();
@@ -350,8 +395,10 @@ package org.flixel
 					replayCancelKey = _replayCancelKeys[i++] as String;
 					if((replayCancelKey == "MOUSE") || (replayCancelKey == "ANY"))
 					{
+						
 						if(_replayCallback != null)
 						{
+							
 							_replayCallback();
 							_replayCallback = null;
 						}
